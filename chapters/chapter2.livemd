@@ -348,13 +348,16 @@ E então resolva esses problemas:
 1. Retorne o temanho da String "pneumoultramicroscopicossilicovulcanoconiótico".
 
 ```elixir
+str = "pneumoultramicroscopicossilicovulcanoconiótico"
 
+String.length(str)
 ```
 
 1. Retorne um Lista que possui os mesmos items da lista [:a :b :c] porém com os itens na ordem contrária, ou seja [:c :b :a].
 
 ```elixir
-
+list = [:a, :b, :c]
+inverted_list = Enum.reverse(list)
 ```
 
 1. Retorne um novo mapa que é a união desses dois mapas:
@@ -365,7 +368,10 @@ segundo_mapa  = %{ :tres  =>  3, :quatro => 4 }
 ```
 
 ```elixir
+primeiro_mapa = %{:um => 1, :dois => 2}
+segundo_mapa = %{:tres => 3, :quatro => 4}
 
+novo_mapa = Map.merge(primeiro_mapa, segundo_mapa)
 ```
 
 1. Retorne uma lista de palavras da setença:
@@ -378,7 +384,7 @@ Como de hábito, Policarpo Quaresma, mais conhecido por Major Quaresma, bateu em
 ```
 
 ```elixir
-
+palavras = String.split(setenca, ", ")
 ```
 
 1. Multiplique todos os itens da seguinte lista e retorne a soma de todos seus items sobrados.
@@ -389,7 +395,8 @@ lista_de_numeros = [4, 8, 12, 16, 20, 24, 28, 32, 36]
 ```
 
 ```elixir
-
+Enum.reduce(lista_de_numeros, 1, fn el, acumulador -> el * acumulador end)
+Enum.reduce(lista_de_numeros, 0, fn el, acumulador -> el + acumulador end)
 ```
 
 ### Exercício 2
