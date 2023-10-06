@@ -848,7 +848,7 @@ Apesar do símbolo do casamento de padrões ser '=', os lados esquerdo e direito
 
 ```
 error: undefined variable "idade"
-  OneDrive/Área de Trabalho/Programação/Learning/Learn4Elixir/chapters/chapter1.livemd#cell:dygf5nhwx7jpmdfnx6d5twx6anigvlch:1
+  OneDrive/Área de Trabalho/Programação/Learning/Learn4Elixir/chapters/chapter1.livemd#cell:6wrspwqurt6fxcdak4djuhkdxaplf3zi:1
 
 ```
 
@@ -1086,7 +1086,7 @@ _
 
 ```
 error: invalid use of _. _ can only be used inside patterns to ignore values and cannot be used in expressions. Make sure you are inside a pattern or change it accordingly
-  OneDrive/Área de Trabalho/Programação/Learning/Learn4Elixir/chapters/chapter1.livemd#cell:v3qqjrjyxavrtu5wefpbgcdr45fyz6jy:1
+  OneDrive/Área de Trabalho/Programação/Learning/Learn4Elixir/chapters/chapter1.livemd#cell:sxly5pk464x7d3r36rselviun6rafanp:1
 
 ```
 
@@ -1378,7 +1378,7 @@ Lembre-se de que as chaves em um mapa são únicas. Se você tentar adicionar um
 
 ```
 warning: key :nome will be overridden in map
-  OneDrive/Área de Trabalho/Programação/Learning/Learn4Elixir/chapters/chapter1.livemd#cell:exjx7scozkk6wr4n2wq3zm33zhsc2dzv:2
+  OneDrive/Área de Trabalho/Programação/Learning/Learn4Elixir/chapters/chapter1.livemd#cell:k6xi7tn7etazz6362xv3qurc2qt7hyc7:2
 
 ```
 
@@ -2124,7 +2124,7 @@ media = (ocamilodev + ocam_l + camilotk_) / 3
 
 ```elixir
 # Checa se a resposta está correta
-if media == 35582.62666666666 do
+if floor(media) == 35582 do
   "Parabéns, você acertou!"
 else
   "Errooooou!"
