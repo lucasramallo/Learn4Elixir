@@ -1,5 +1,3 @@
-<!-- livebook:{"persist_outputs":true} -->
-
 # Learn4Elixir - Capítulo 2
 
 ## Funções em Elixir
@@ -20,22 +18,10 @@ Elixir já vem com várias funções. Estas funções fazem parte de módulos. P
 String.upcase("não grite, por favor!")
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-"NÃO GRITE, POR FAVOR!"
-```
-
-Você pode ter achado estranho a aplicação de String.upcase/2 acima recebe apenas um argumento. Isto acontece pois Elixir permite que sejam definidas funções com argumentos _default_. Neste caso, o segundo argumento é o modo. Se você não passar nada, é o mesmo que chamar da seguinte forma:
+Você pode ter achado estranho a aplicação de String.upcase/2 acima receber apenas um argumento. Isto acontece pois Elixir permite que sejam definidas funções com argumentos _default_. Neste caso, o segundo argumento é o modo. Se você não passar nada, é o mesmo que chamar da seguinte forma:
 
 ```elixir
 String.upcase("não grite, por favor!", :default)
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-"NÃO GRITE, POR FAVOR!"
 ```
 
 Mas eu posso escolher entre quatro valores: :default, :ascii, :greek, :turkic. Vamos testar dois deles e observar a diferença.
@@ -45,21 +31,9 @@ Mas eu posso escolher entre quatro valores: :default, :ascii, :greek, :turkic. V
 String.upcase("não grite, por favor!", :ascii)
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-"NãO GRITE, POR FAVOR!"
-```
-
 ```elixir
 # observe o I acentuado
 String.upcase("não grite, por favor!", :turkic)
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-"NÃO GRİTE, POR FAVOR!"
 ```
 
 ## Definindo suas próprias funções nomeadas e seus módulos
@@ -76,12 +50,6 @@ defmodule Matematica do
     num1 - num2
   end
 end
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-{:module, Matematica, <<70, 79, 82, 49, 0, 0, 7, ...>>, {:subtracao, 2}}
 ```
 
 Observe que o formato é:
@@ -104,23 +72,19 @@ Depois que você define o módulo e o avalia, você pode usar suas funções.
 Matematica.soma(30, 40)
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-70
-```
-
 ```elixir
 Matematica.subtracao(30, 56)
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
--26
-```
-
 Vamos definir outro módulo:
+
+```elixir
+Enum.sum([1.0, 3, 4])
+```
+
+```elixir
+Enum.count([1, 34, 56, 78, 1])
+```
 
 ```elixir
 defmodule Turma do
@@ -134,12 +98,6 @@ defmodule Turma do
 
   def aprovado?(_), do: false
 end
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-{:module, Turma, <<70, 79, 82, 49, 0, 0, 7, ...>>, {:aprovado?, 1}}
 ```
 
 No exemplo acima, usamos duas funções do [módulo Enum](https://hexdocs.pm/elixir/1.15.0/Enum.html): uma para somar todos os valores de uma lista de notas (Enum.sum/1) e outra para contar quantas notas tem na lista (Enum.count/1). A partir disto, calculamos a média de todas as notas da turma.
@@ -177,40 +135,16 @@ Podemos ter várias cláusulas (ou seja, vários 'def's) para uma mesma função
 Turma.media([10, 4, 6, 7, 8])
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-7.0
-```
-
 ```elixir
 Turma.aprovado?(6)
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-true
 ```
 
 ```elixir
 Turma.aprovado?(5)
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-false
-```
-
 ```elixir
 Turma.aprovado?(7)
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-true
 ```
 
 ## Funções sem nome (anônimas)
@@ -229,12 +163,6 @@ No exemplo abaixo, definimos uma função que recebe um valor 'num' (que represe
 fn num -> num + 1 end
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-#Function<42.125776118/1 in :erl_eval.expr/6>
-```
-
 Quando você avalia o código acima, você percebe que Elixir te dá algo como:
 
 ```
@@ -251,22 +179,10 @@ Como então podemos aplicar a função anônima que acabamos de definir a um val
 f = fn num -> num + 1 end
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-#Function<42.125776118/1 in :erl_eval.expr/6>
-```
-
 E só depois chamar a função:
 
 ```elixir
 f.(2)
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-3
 ```
 
 Perceberam que, para chamar a função 'f', precisamos colocar um ponto antes dos parênteses? É uma característica de Ellxir (que na prática não é um problema).
@@ -277,12 +193,6 @@ Outra forma é fazer a chamada diretamente (também usando o ponto):
 
 ```elixir
 (fn num -> num + 1 end).(2)
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-3
 ```
 
 ## Funções de ordem mais alta
@@ -301,22 +211,10 @@ Por exemplo, a função 'Enum.map/2' recebe, no exemplo abaixo, como entrada uma
 Enum.map([10, 20, 3, 45], fn x -> x + 12 end)
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-[22, 32, 15, 57]
-```
-
-A função 'Enum.reduce/2' recebe como argumento uma lista, um valor inicial e uma função de aridade 2. No exemplo abaixo, a lista é '[1, 2,3]', o valor inicial é 0 e a função soma um elemento da lista ao acumulador, que passa a ter o valor desta soma. Deste modo, o resultado será '0+1+2+3'.
+A função 'Enum.reduce/3' recebe como argumento uma lista, um valor inicial e uma função de aridade 2. No exemplo abaixo, a lista é '[1, 2,3]', o valor inicial é 0 e a função soma um elemento da lista ao acumulador, que passa a ter o valor desta soma. Deste modo, o resultado será '0+1+2+3'.
 
 ```elixir
 Enum.reduce([1, 2, 3], 0, fn elemento, acumulador -> elemento + acumulador end)
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-6
 ```
 
 E como seria um exemplo de uma função que retorna outra função?
@@ -330,34 +228,16 @@ defmodule HOF do
 end
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-{:module, HOF, <<70, 79, 82, 49, 0, 0, 7, ...>>, {:incrementador, 1}}
-```
-
 Ou seja, se eu chamar desta forma:
 
 ```elixir
 HOF.incrementador(3)
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-#Function<0.126295635/1 in HOF.incrementador/1>
-```
-
 Eu obtenho uma função que incrementa 3 ao valor que receber. Portanto, se eu passar 5 a esta função, o resultado será 8.
 
 ```elixir
 HOF.incrementador(3).(5)
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-8
 ```
 
 É útil? Não lembro de nenhuma utilidade deste tipo de função em meu código. Mas pode ser útil em bibliotecas bem específicas.
@@ -375,12 +255,6 @@ require Integer
 Enum.all?(Enum.map([1, 2, 3, 4], fn x -> x * 2 end), &Integer.is_even/1)
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-true
-```
-
 Podemos escrever:
 
 ```elixir
@@ -389,12 +263,6 @@ require Integer
 [1, 2, 3, 4]
 |> Enum.map(fn x -> x * 2 end)
 |> Enum.all?(&Integer.is_even/1)
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-true
 ```
 
 Ou seja, o pipe envia o resultado de uma expressão como o primeiro parâmetro para a próxima chamada a função.
@@ -413,12 +281,6 @@ defmodule Mat do
     (num1 + num2) / 2
   end
 end
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-{:module, Mat, <<70, 79, 82, 49, 0, 0, 6, ...>>, {:media, 2}}
 ```
 
 Vamos supor que eu queira ter uma função auxiliar, uma função que é usada apenas pelas outras funções do módulo. Este é o caso em que definimos uma função previada e para isso, em vez de 'def', usamos 'defp'.
@@ -447,10 +309,8 @@ defmodule Matem do
 end
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-{:module, Matem, <<70, 79, 82, 49, 0, 0, 8, ...>>, {:fatorial, 2}}
+```elixir
+Matem.fatorial(1000)
 ```
 
 ## Exercícios
@@ -493,23 +353,11 @@ str = "pneumoultramicroscopicossilicovulcanoconiótico"
 String.length(str)
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-46
-```
-
 1. Retorne um Lista que possui os mesmos items da lista [:a :b :c] porém com os itens na ordem contrária, ou seja [:c :b :a].
 
 ```elixir
 list = [:a, :b, :c]
 inverted_list = Enum.reverse(list)
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-[:c, :b, :a]
 ```
 
 1. Retorne um novo mapa que é a união desses dois mapas:
@@ -526,12 +374,6 @@ segundo_mapa = %{:tres => 3, :quatro => 4}
 novo_mapa = Map.merge(primeiro_mapa, segundo_mapa)
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-%{um: 1, dois: 2, tres: 3, quatro: 4}
-```
-
 1. Retorne uma lista de palavras da setença:
 
 ```elixir
@@ -541,23 +383,8 @@ Como de hábito, Policarpo Quaresma, mais conhecido por Major Quaresma, bateu em
 """
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-"Como de hábito, Policarpo Quaresma, mais conhecido por Major Quaresma, bateu em casa às quatro e quinze da tarde. Havia mais de vinte anos que isso acontecia. Saindo do Arsenal de Guerra, onde era subsecretário, bongava pelas confeitarias algumas frutas, comprava um queijo, às vezes, e sempre o pão da padaria francesa.\n"
-```
-
 ```elixir
 palavras = String.split(setenca, ", ")
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-["Como de hábito", "Policarpo Quaresma", "mais conhecido por Major Quaresma",
- "bateu em casa às quatro e quinze da tarde. Havia mais de vinte anos que isso acontecia. Saindo do Arsenal de Guerra",
- "onde era subsecretário", "bongava pelas confeitarias algumas frutas", "comprava um queijo",
- "às vezes", "e sempre o pão da padaria francesa.\n"]
 ```
 
 1. Multiplique todos os itens da seguinte lista e retorne a soma de todos seus items sobrados.
@@ -567,21 +394,9 @@ palavras = String.split(setenca, ", ")
 lista_de_numeros = [4, 8, 12, 16, 20, 24, 28, 32, 36]
 ```
 
-<!-- livebook:{"output":true} -->
-
-```
-[4, 8, 12, 16, 20, 24, 28, 32, 36]
-```
-
 ```elixir
 Enum.reduce(lista_de_numeros, 1, fn el, acumulador -> el * acumulador end)
 Enum.reduce(lista_de_numeros, 0, fn el, acumulador -> el + acumulador end)
-```
-
-<!-- livebook:{"output":true} -->
-
-```
-180
 ```
 
 ### Exercício 2
